@@ -4,14 +4,11 @@
   "commit": false,
   "fixed": [
     [
-      "@ai-sdk-tools/agents",
-      "ai-sdk-tools",
-      "@ai-sdk-tools/artifacts",
-      "@ai-sdk-tools/cache",
-      "@ai-sdk-tools/debug",
-      "@ai-sdk-tools/devtools",
-      "@ai-sdk-tools/memory",
-      "@ai-sdk-tools/store"
+      "@chagas-ai/ai-sdk-tools-agents",
+      "@chagas-ai/ai-sdk-tools-artifacts",
+      "@chagas-ai/ai-sdk-tools-devtools",
+      "@chagas-ai/ai-sdk-tools-memory",
+      "@chagas-ai/ai-sdk-tools-store"
     ]
   ],
   "linked": [],

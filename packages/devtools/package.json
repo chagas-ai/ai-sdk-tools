@@ -1,6 +1,6 @@
 {
-  "name": "@ai-sdk-tools/devtools",
-  "version": "1.2.0",
+  "name": "@chagas-ai/ai-sdk-tools-devtools",
+  "version": "1.2.0-chagas.0",
   "description": "AI development tools for debugging and monitoring AI SDKs streams",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -40,10 +40,10 @@
     "@ai-sdk/react": ">=2.0.0",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
-    "@ai-sdk-tools/store": "*"
+    "@chagas-ai/ai-sdk-tools-store": "*"
   },
   "peerDependenciesMeta": {
-    "@ai-sdk-tools/store": {
+    "@chagas-ai/ai-sdk-tools-store": {
       "optional": true
     }
   },
@@ -55,7 +55,7 @@
     "tsup": "^8.5.0",
     "typescript": "^5.9.3",
     "@ai-sdk/react": "^2.0.82",
-    "@ai-sdk-tools/store": "workspace:*"
+    "@chagas-ai/ai-sdk-tools-store": "workspace:*"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -70,12 +70,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/midday-ai/ai-sdk-tools.git"
+    "url": "https://github.com/chagas-ai/ai-sdk-tools.git"
   },
   "bugs": {
-    "url": "https://github.com/midday-ai/ai-sdk-tools/issues"
+    "url": "https://github.com/chagas-ai/ai-sdk-tools/issues"
   },
-  "homepage": "https://github.com/midday-ai/ai-sdk-tools#readme",
+  "homepage": "https://github.com/chagas-ai/ai-sdk-tools#readme",
   "publishConfig": {
     "access": "public"
   }

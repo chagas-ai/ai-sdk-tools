@@ -1,4 +1,4 @@
-import type { MemoryConfig } from "@ai-sdk-tools/memory";
+import type { MemoryConfig } from "@chagas-ai/ai-sdk-tools-memory";
 import type {
   IdGenerator,
   LanguageModel,
@@ -293,6 +293,26 @@ export interface AgentStreamOptionsUI<
   beforeStream?: (ctx: {
     writer: UIMessageStreamWriter;
   }) => Promise<boolean | undefined>;
+  /**
+   * Persist the current user message before streaming starts.
+   * The save occurs after history load and before model execution.
+   */
+  preSaveUserMessage?: {
+    /** Enable user-message pre-save */
+    enabled: boolean;
+    /**
+     * Optional transform before persistence (e.g. remove ephemeral fields).
+     * Return value is serialized and written to memory history.
+     */
+    transformForStorage?: (
+      message: UIMessage,
+    ) => UIMessage | Promise<UIMessage>;
+    /**
+     * Deduplicate by message id when loading history.
+     * Default: true
+     */
+    dedupeByMessageId?: boolean;
+  };
   /** Lifecycle event handler */
   onEvent?: (event: AgentEvent) => void | Promise<void>;
 
@@ -327,6 +347,15 @@ export interface AgentStreamOptionsUI<
   statusText?: string;
   /** HTTP headers */
   headers?: Record<string, string>;
+  /** Optional SSE stream consumer for resumable stream storage */
+  consumeSseStream?: (options: {
+    stream: ReadableStream<string>;
+  }) => PromiseLike<void> | void;
+  /**
+   * Skip saving user message in wrappedOnFinish.
+   * Useful when preSaveUserMessage is enabled externally.
+   */
+  skipUserMessageSave?: boolean;
 }
 
 /**

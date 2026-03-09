@@ -1,6 +1,6 @@
 {
-  "name": "@ai-sdk-tools/memory",
-  "version": "1.2.0",
+  "name": "@chagas-ai/ai-sdk-tools-memory",
+  "version": "1.2.0-chagas.0",
   "description": "Persistent memory system for AI agents",
   "type": "module",
   "exports": {

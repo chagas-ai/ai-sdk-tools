@@ -12,7 +12,7 @@
  * - Available in all tools via executionOptions.experimental_context
  */
 
-import type { MemoryConfig } from "@ai-sdk-tools/memory";
+import type { MemoryConfig } from "@chagas-ai/ai-sdk-tools-memory";
 import type { UIMessageStreamWriter } from "ai";
 
 /**
@@ -160,7 +160,7 @@ export function createExecutionContext<
  */
 export function getContext<
   T extends Record<string, unknown> = Record<string, unknown>,
->(executionOptions?: { experimental_context?: T }): T | undefined {
+>(executionOptions?: { experimental_context?: unknown }): T | undefined {
   // AI SDK passes context via experimental_context
-  return executionOptions?.experimental_context;
+  return executionOptions?.experimental_context as T | undefined;
 }

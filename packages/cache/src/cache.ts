@@ -118,7 +118,9 @@ function createStreamingCachedTool<T extends Tool>(
           // Writer comes from AI SDK's experimental_context
           if (!writer) {
             try {
-              const { getWriter } = await import("@ai-sdk-tools/artifacts");
+              const { getWriter } = await import(
+                "@chagas-ai/ai-sdk-tools-artifacts"
+              );
               writer = getWriter(executionOptions);
             } catch {
               // Artifacts package not available or writer not available
@@ -174,7 +176,9 @@ function createStreamingCachedTool<T extends Tool>(
       // Writer comes from AI SDK's experimental_context
       if (!writer) {
         try {
-          const { getWriter } = await import("@ai-sdk-tools/artifacts");
+          const { getWriter } = await import(
+            "@chagas-ai/ai-sdk-tools-artifacts"
+          );
           writer = getWriter(executionOptions);
         } catch {
           // Artifacts package not available or writer not available

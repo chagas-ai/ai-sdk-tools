@@ -4,7 +4,7 @@ import {
   formatWorkingMemory,
   getWorkingMemoryInstructions,
   type MemoryConfig,
-} from "@ai-sdk-tools/memory";
+} from "@chagas-ai/ai-sdk-tools-memory";
 import {
   Experimental_Agent as AISDKAgent,
   convertToModelMessages,
@@ -350,6 +350,7 @@ export class Agent<
       agentChoice,
       toolChoice,
       beforeStream,
+      preSaveUserMessage,
       onEvent,
       // AI SDK createUIMessageStream options
       onFinish,
@@ -365,10 +366,14 @@ export class Agent<
       status,
       statusText,
       headers,
+      consumeSseStream,
+      skipUserMessageSave,
     } = options;
 
     // Declare variable to store chat metadata (will be loaded in execute block)
     let existingChatForSave: any = null;
+    // Set during execute() when preSaveUserMessage.enabled is active
+    let didPreSaveUserMessage = false;
 
     // Wrap onFinish to save messages after streaming
     const wrappedOnFinish: UIMessageStreamOnFinishCallback<never> = async (
@@ -384,28 +389,37 @@ export class Agent<
           logger.warn("Cannot save messages: chatId is missing from context");
         } else {
           try {
-            // The AI SDK provides complete messages with all parts in event.messages
-            const userMsg: any = event.messages[event.messages.length - 2]; // second to last is user message
-            const assistantMsg: any = event.messages[event.messages.length - 1]; // last is assistant message
+            const shouldSkipUserSave =
+              skipUserMessageSave || didPreSaveUserMessage;
 
-            // Filter out file parts from user message - files should never be stored in history
-            // They're only needed during initial LLM processing
-            let userMsgToSave: any = userMsg;
-            if (userMsg && Array.isArray(userMsg.content)) {
-              const filteredContent = userMsg.content.filter(
-                (part: any) => part.type !== "file",
-              );
-              userMsgToSave = {
-                ...userMsg,
-                content: filteredContent.length > 0 ? filteredContent : "",
-              };
+            // The AI SDK provides complete messages with all parts in event.messages
+            const assistantMsg: any = event.messages[event.messages.length - 1]; // last is assistant message
+            let userMsgJson: string | null = null;
+
+            if (!shouldSkipUserSave) {
+              const userMsg: any = event.messages[event.messages.length - 2]; // second to last is user message
+              // Filter out file parts from user message - files should never be stored in history
+              // They're only needed during initial LLM processing
+              let userMsgToSave: any = userMsg;
+              if (userMsg && Array.isArray(userMsg.content)) {
+                const filteredContent = userMsg.content.filter(
+                  (part: any) => part.type !== "file",
+                );
+                userMsgToSave = {
+                  ...userMsg,
+                  content: filteredContent.length > 0 ? filteredContent : "",
+                };
+              }
+              userMsgJson = JSON.stringify(userMsgToSave);
             }
 
-            logger.debug(`Saving messages (files excluded from storage)`);
+            logger.debug(
+              `Saving messages (files excluded from storage)${shouldSkipUserSave ? " [user msg pre-saved]" : ""}`,
+            );
             await this.saveConversation(
               chatId,
               userId,
-              JSON.stringify(userMsgToSave),
+              userMsgJson,
               JSON.stringify(assistantMsg),
               existingChatForSave,
             );
@@ -426,8 +440,14 @@ export class Agent<
       generateId,
       execute: async ({ writer }) => {
         // Load history and working memory in parallel for better performance
+        const dedupeByMessageId =
+          preSaveUserMessage?.dedupeByMessageId ?? true;
         const [messages, memoryAddition] = await Promise.all([
-          this.loadMessagesWithHistory(message, context as TContext),
+          this.loadMessagesWithHistory(
+            message,
+            context as TContext,
+            dedupeByMessageId,
+          ),
           context && this.memory?.workingMemory?.enabled
             ? this.loadWorkingMemory(context as TContext)
             : Promise.resolve(""),
@@ -487,6 +507,14 @@ export class Agent<
               writer.write({ type: "finish" } as any);
               return;
             }
+          }
+
+          if (preSaveUserMessage?.enabled) {
+            didPreSaveUserMessage = await this.preSaveUserMessageIfEnabled(
+              message,
+              context as TContext,
+              preSaveUserMessage,
+            );
           }
 
           // Prepare conversation messages
@@ -1179,6 +1207,7 @@ export class Agent<
       status,
       statusText,
       headers,
+      consumeSseStream,
     });
 
     return response;
@@ -1195,6 +1224,56 @@ export class Agent<
     const chatId = ctx.chatId || ctx.metadata?.chatId;
     const userId = ctx.userId || ctx.metadata?.userId;
     return { chatId, userId };
+  }
+
+  /**
+   * Persist current user message before streaming starts.
+   * Runs after history loading to avoid duplicate prompt context.
+   */
+  private async preSaveUserMessageIfEnabled(
+    message: UIMessage,
+    context: TContext | undefined,
+    options:
+      | {
+          enabled: boolean;
+          transformForStorage?: (
+            message: UIMessage,
+          ) => UIMessage | Promise<UIMessage>;
+        }
+      | undefined,
+  ): Promise<boolean> {
+    if (!options?.enabled) return false;
+    if (!this.memory?.provider || !this.memory?.history?.enabled || !context) {
+      return false;
+    }
+
+    const { chatId, userId } = this.extractMemoryIdentifiers(context);
+    if (!chatId) {
+      logger.warn("Cannot pre-save message: chatId is missing from context");
+      return false;
+    }
+
+    try {
+      const messageForStorage = options.transformForStorage
+        ? await options.transformForStorage(message)
+        : message;
+
+      await this.memory.provider.saveMessage?.({
+        chatId,
+        userId,
+        role: "user",
+        content: JSON.stringify(messageForStorage),
+        timestamp: new Date(),
+      });
+      logger.debug(`Pre-saved user message for chatId=${chatId}`, { chatId });
+      return true;
+    } catch (error) {
+      logger.error(`Failed to pre-save user message for chatId=${chatId}`, {
+        chatId,
+        error: error instanceof Error ? error.message : error,
+      });
+      return false;
+    }
   }
 
   /**
@@ -1483,6 +1562,7 @@ Good suggestions are:
   private async loadMessagesWithHistory(
     message: UIMessage,
     context: TContext | undefined,
+    dedupeByMessageId = true,
   ): Promise<ModelMessage[]> {
     // No memory - just convert the message
     if (!this.memory?.history?.enabled || !context) {
@@ -1522,8 +1602,31 @@ Good suggestions are:
         return convertToModelMessages([message]);
       }
 
+      let dedupedPreviousMessages = previousMessages;
+      if (dedupeByMessageId) {
+        const lastHistoryMessage: any =
+          previousMessages[previousMessages.length - 1];
+        if (
+          lastHistoryMessage?.role === "user" &&
+          message?.role === "user" &&
+          lastHistoryMessage?.id &&
+          message?.id &&
+          lastHistoryMessage.id === message.id
+        ) {
+          dedupedPreviousMessages = previousMessages.slice(0, -1);
+          logger.debug(`Deduped last history message for chatId=${chatId}`, {
+            chatId,
+            messageId: message.id,
+          });
+        }
+      }
+
+      if (dedupedPreviousMessages.length === 0) {
+        return convertToModelMessages([message]);
+      }
+
       const historyMessages = convertToModelMessages(
-        stripMetadata(previousMessages),
+        stripMetadata(dedupedPreviousMessages),
       );
 
       logger.debug(
@@ -1555,7 +1658,7 @@ Good suggestions are:
   private async saveConversation(
     chatId: string,
     userId: string | undefined,
-    userMessage: string,
+    userMessage: string | null,
     assistantMessage: string,
     existingChat?: any,
   ): Promise<void> {
@@ -1563,21 +1666,25 @@ Good suggestions are:
 
     logger.debug(`Saving conversation for chatId=${chatId}`, {
       chatId,
-      userLength: userMessage.length,
+      userLength: userMessage ? userMessage.length : 0,
       assistantLength: assistantMessage.length,
     });
 
     // Save messages and update chat session in parallel for better performance
     try {
-      const savePromises = [
-        this.memory.provider.saveMessage?.({
-          chatId,
-          userId,
-          role: "user",
-          content: userMessage,
-          timestamp: new Date(),
-        }),
-      ];
+      const savePromises: Array<Promise<unknown> | undefined> = [];
+
+      if (userMessage) {
+        savePromises.push(
+          this.memory.provider.saveMessage?.({
+            chatId,
+            userId,
+            role: "user",
+            content: userMessage,
+            timestamp: new Date(),
+          }),
+        );
+      }
 
       // Only save assistant message if it has content
       if (assistantMessage && assistantMessage.length > 0) {

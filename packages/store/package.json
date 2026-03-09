@@ -1,6 +1,6 @@
 {
-  "name": "@ai-sdk-tools/store",
-  "version": "1.2.0",
+  "name": "@chagas-ai/ai-sdk-tools-store",
+  "version": "1.2.0-chagas.0",
   "description": "A drop-in replacement for @ai-sdk/react that automatically syncs chat state to Zustand stores",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -51,12 +51,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/midday-ai/ai-sdk-tools.git"
+    "url": "https://github.com/chagas-ai/ai-sdk-tools.git"
   },
   "bugs": {
-    "url": "https://github.com/midday-ai/ai-sdk-tools/issues"
+    "url": "https://github.com/chagas-ai/ai-sdk-tools/issues"
   },
-  "homepage": "https://github.com/midday-ai/ai-sdk-tools#readme",
+  "homepage": "https://github.com/chagas-ai/ai-sdk-tools#readme",
   "publishConfig": {
     "access": "public"
   },

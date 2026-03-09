@@ -1,0 +1,35 @@
+name: Changeset Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  changeset-check:
+    name: Require Changeset
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify changeset exists for publishable package changes
+        run: |
+          git fetch origin "${{ github.base_ref }}" --depth=1
+
+          CHANGED_FILES=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
+          echo "$CHANGED_FILES"
+
+          if echo "$CHANGED_FILES" | grep -Eq '^packages/(agents|artifacts|memory|store|devtools)/'; then
+            if ! echo "$CHANGED_FILES" | grep -Eq '^\.changeset/.+\.md$'; then
+              echo "::error::Changes in publishable packages require a .changeset/*.md file"
+              exit 1
+            fi
+          fi

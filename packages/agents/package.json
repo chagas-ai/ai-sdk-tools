@@ -1,6 +1,6 @@
 {
-  "name": "@ai-sdk-tools/agents",
-  "version": "1.2.0",
+  "name": "@chagas-ai/ai-sdk-tools-agents",
+  "version": "1.2.0-chagas.0",
   "description": "Multi-agent orchestration system built on AI SDK v5 - handoffs, routing, and coordination for any AI provider",
   "keywords": [
     "ai",
@@ -19,13 +19,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/midday-ai/ai-sdk-tools.git",
+    "url": "https://github.com/chagas-ai/ai-sdk-tools.git",
     "directory": "packages/agents"
   },
   "bugs": {
-    "url": "https://github.com/midday-ai/ai-sdk-tools/issues"
+    "url": "https://github.com/chagas-ai/ai-sdk-tools/issues"
   },
-  "homepage": "https://github.com/midday-ai/ai-sdk-tools/tree/main/packages/agents#readme",
+  "homepage": "https://github.com/chagas-ai/ai-sdk-tools/tree/main/packages/agents#readme",
   "type": "module",
   "exports": {
     ".": {
@@ -54,7 +54,7 @@
     "zod": "^3.25.76 || ^4.1.8"
   },
   "peerDependenciesMeta": {
-    "@ai-sdk-tools/artifacts": {
+    "@chagas-ai/ai-sdk-tools-artifacts": {
       "optional": true
     },
     "@ai-sdk-tools/cache": {
@@ -68,7 +68,7 @@
     "zod": "^4.1.12",
     "ai": "^5.0.97",
     "@ai-sdk-tools/debug": "workspace:*",
-    "@ai-sdk-tools/memory": "workspace:*"
+    "@chagas-ai/ai-sdk-tools-memory": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

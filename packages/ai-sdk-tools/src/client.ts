@@ -10,8 +10,8 @@
  */
 
 // Client-side artifact hooks
-export * from "@ai-sdk-tools/artifacts/client";
+export * from "@chagas-ai/ai-sdk-tools-artifacts/client";
 // Devtools components
-export * from "@ai-sdk-tools/devtools";
+export * from "@chagas-ai/ai-sdk-tools-devtools";
 // Store hooks and state management
-export * from "@ai-sdk-tools/store";
+export * from "@chagas-ai/ai-sdk-tools-store";

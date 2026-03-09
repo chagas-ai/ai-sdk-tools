@@ -28,13 +28,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/midday-ai/ai-sdk-tools.git",
+    "url": "https://github.com/chagas-ai/ai-sdk-tools.git",
     "directory": "packages/ai-sdk-tools"
   },
   "bugs": {
-    "url": "https://github.com/midday-ai/ai-sdk-tools/issues"
+    "url": "https://github.com/chagas-ai/ai-sdk-tools/issues"
   },
-  "homepage": "https://github.com/midday-ai/ai-sdk-tools#readme",
+  "homepage": "https://github.com/chagas-ai/ai-sdk-tools#readme",
   "type": "module",
   "exports": {
     ".": {
@@ -97,12 +97,12 @@
     "typescript": "^5.9.3",
     "zod": "^4.1.12",
     "ai": "^5.0.97",
-    "@ai-sdk-tools/agents": "workspace:*",
-    "@ai-sdk-tools/artifacts": "workspace:*",
+    "@chagas-ai/ai-sdk-tools-agents": "workspace:*",
+    "@chagas-ai/ai-sdk-tools-artifacts": "workspace:*",
     "@ai-sdk-tools/cache": "workspace:*",
-    "@ai-sdk-tools/devtools": "workspace:*",
-    "@ai-sdk-tools/memory": "workspace:*",
-    "@ai-sdk-tools/store": "workspace:*"
+    "@chagas-ai/ai-sdk-tools-devtools": "workspace:*",
+    "@chagas-ai/ai-sdk-tools-memory": "workspace:*",
+    "@chagas-ai/ai-sdk-tools-store": "workspace:*"
   },
   "publishConfig": {
     "access": "public"
