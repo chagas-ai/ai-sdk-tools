@@ -20,8 +20,8 @@
     "build:ai-sdk-tools": "cd packages/ai-sdk-tools && bun run build",
     "build:debug": "cd packages/debug && bun run build",
     "build:example": "bun run build && cd apps/example && bun run build",
-    "dev": "bun run -r --filter='@chagas-ai/ai-sdk-tools-store' --filter='@chagas-ai/ai-sdk-tools-devtools' --filter='@chagas-ai/ai-sdk-tools-artifacts' --filter='@chagas-ai/ai-sdk-tools-agents' dev",
-    "dev:beta": "bun run -r --filter='@chagas-ai/ai-sdk-tools-store' --filter='@chagas-ai/ai-sdk-tools-devtools' --filter='@chagas-ai/ai-sdk-tools-artifacts' --filter='@chagas-ai/ai-sdk-tools-agents' dev",
+    "dev": "bun run -r --filter='@chagas-ai/store' --filter='@chagas-ai/devtools' --filter='@chagas-ai/artifacts' --filter='@chagas-ai/agents' dev",
+    "dev:beta": "bun run -r --filter='@chagas-ai/store' --filter='@chagas-ai/devtools' --filter='@chagas-ai/artifacts' --filter='@chagas-ai/agents' dev",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "node scripts/check-beta-mode.js exit-if-beta && node scripts/clean-beta-versions.js && bun run build:chagas && node scripts/ensure-changesets.js && changeset version && changeset publish --tag latest --provenance",
@@ -32,10 +32,10 @@
     "release:beta": "bun run build:chagas && changeset version && changeset publish --tag beta --provenance",
     "release:beta:publish": "bun run build:beta && changeset publish --tag beta --provenance",
     "clean": "bun run -r --filter='@ai-sdk-tools/*' clean",
-    "clean:beta": "bun run -r --filter='@chagas-ai/ai-sdk-tools-store' --filter='@chagas-ai/ai-sdk-tools-devtools' --filter='@chagas-ai/ai-sdk-tools-artifacts' --filter='@chagas-ai/ai-sdk-tools-agents' clean",
-    "type-check:chagas": "bun run -r --filter='@chagas-ai/ai-sdk-tools-store' --filter='@chagas-ai/ai-sdk-tools-devtools' --filter='@chagas-ai/ai-sdk-tools-artifacts' --filter='@chagas-ai/ai-sdk-tools-agents' --filter='@chagas-ai/ai-sdk-tools-memory' type-check",
+    "clean:beta": "bun run -r --filter='@chagas-ai/store' --filter='@chagas-ai/devtools' --filter='@chagas-ai/artifacts' --filter='@chagas-ai/agents' clean",
+    "type-check:chagas": "bun run -r --filter='@chagas-ai/store' --filter='@chagas-ai/devtools' --filter='@chagas-ai/artifacts' --filter='@chagas-ai/agents' --filter='@chagas-ai/memory' type-check",
     "type-check": "bun run type-check:chagas",
-    "type-check:beta": "bun run -r --filter='@chagas-ai/ai-sdk-tools-store' --filter='@chagas-ai/ai-sdk-tools-devtools' --filter='@chagas-ai/ai-sdk-tools-artifacts' --filter='@chagas-ai/ai-sdk-tools-agents' type-check"
+    "type-check:beta": "bun run -r --filter='@chagas-ai/store' --filter='@chagas-ai/devtools' --filter='@chagas-ai/artifacts' --filter='@chagas-ai/agents' type-check"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.6",

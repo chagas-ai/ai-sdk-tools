@@ -4,7 +4,7 @@ import {
   formatWorkingMemory,
   getWorkingMemoryInstructions,
   type MemoryConfig,
-} from "@chagas-ai/ai-sdk-tools-memory";
+} from "@chagas-ai/memory";
 import {
   Experimental_Agent as AISDKAgent,
   convertToModelMessages,

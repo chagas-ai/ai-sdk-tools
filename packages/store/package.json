@@ -1,5 +1,5 @@
 {
-  "name": "@chagas-ai/ai-sdk-tools-store",
+  "name": "@chagas-ai/store",
   "version": "1.2.0-chagas.0",
   "description": "A drop-in replacement for @ai-sdk/react that automatically syncs chat state to Zustand stores",
   "main": "./dist/index.js",

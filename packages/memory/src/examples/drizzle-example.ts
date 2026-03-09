@@ -11,7 +11,7 @@
 import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { sql } from "@vercel/postgres";
-import { DrizzleProvider } from "@chagas-ai/ai-sdk-tools-memory";
+import { DrizzleProvider } from "@chagas-ai/memory";
 
 // Define your schema
 export const workingMemory = pgTable("working_memory", {
@@ -49,7 +49,7 @@ export const memoryProvider = new DrizzleProvider(db, {
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
-import { DrizzleProvider } from "@chagas-ai/ai-sdk-tools-memory";
+import { DrizzleProvider } from "@chagas-ai/memory";
 
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql);
@@ -68,7 +68,7 @@ export const memoryProvider = new DrizzleProvider(db, {
 import { connect } from "@planetscale/database";
 import { drizzle } from "drizzle-orm/planetscale-serverless";
 import { int, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
-import { DrizzleProvider } from "@chagas-ai/ai-sdk-tools-memory";
+import { DrizzleProvider } from "@chagas-ai/memory";
 
 const connection = connect({
   url: process.env.DATABASE_URL,
@@ -107,7 +107,7 @@ export const memoryProvider = new DrizzleProvider(db, {
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import Database from "better-sqlite3";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { DrizzleProvider } from "@chagas-ai/ai-sdk-tools-memory";
+import { DrizzleProvider } from "@chagas-ai/memory";
 
 const sqlite = new Database("memory.db");
 const db = drizzle(sqlite);
@@ -143,7 +143,7 @@ export const memoryProvider = new DrizzleProvider(db, {
 import { drizzle } from "drizzle-orm/libsql";
 import { createClient } from "@libsql/client";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { DrizzleProvider } from "@chagas-ai/ai-sdk-tools-memory";
+import { DrizzleProvider } from "@chagas-ai/memory";
 
 // Connect to Turso (or local file with "file:memory.db")
 const client = createClient({
@@ -167,7 +167,7 @@ export const memoryProvider = new DrizzleProvider(db, {
 // If you already have a Drizzle schema, just pass your tables:
 import { db } from "./db";
 import { myWorkingMemory, myMessages } from "./schema";
-import { DrizzleProvider } from "@chagas-ai/ai-sdk-tools-memory";
+import { DrizzleProvider } from "@chagas-ai/memory";
 
 export const memoryProvider = new DrizzleProvider(db, {
   workingMemoryTable: myWorkingMemory,
@@ -181,7 +181,7 @@ export const memoryProvider = new DrizzleProvider(db, {
 /*
 import { Agent } from "@ai-sdk-tools/agents";
 import { openai } from "@ai-sdk/openai";
-import { DrizzleProvider } from "@chagas-ai/ai-sdk-tools-memory";
+import { DrizzleProvider } from "@chagas-ai/memory";
 import { db, workingMemory, conversationMessages } from "./db";
 
 const memoryProvider = new DrizzleProvider(db, {

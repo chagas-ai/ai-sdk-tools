@@ -1,9 +1,9 @@
 ---
-"@chagas-ai/ai-sdk-tools-agents": patch
-"@chagas-ai/ai-sdk-tools-artifacts": patch
-"@chagas-ai/ai-sdk-tools-devtools": patch
-"@chagas-ai/ai-sdk-tools-memory": patch
-"@chagas-ai/ai-sdk-tools-store": patch
+"@chagas-ai/agents": patch
+"@chagas-ai/artifacts": patch
+"@chagas-ai/devtools": patch
+"@chagas-ai/memory": patch
+"@chagas-ai/store": patch
 ---
 
 Initial Chagas fork release:

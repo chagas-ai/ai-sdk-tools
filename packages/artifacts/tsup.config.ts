@@ -16,7 +16,7 @@ export default defineConfig({
     "react-dom",
     "react/jsx-runtime",
     "@ai-sdk/react",
-    "@chagas-ai/ai-sdk-tools-store",
+    "@chagas-ai/store",
   ],
   onSuccess: async () => {
     // Inject 'use client' directive ONLY into client builds

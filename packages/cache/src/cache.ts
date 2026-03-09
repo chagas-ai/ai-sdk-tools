@@ -119,7 +119,7 @@ function createStreamingCachedTool<T extends Tool>(
           if (!writer) {
             try {
               const { getWriter } = await import(
-                "@chagas-ai/ai-sdk-tools-artifacts"
+                "@chagas-ai/artifacts"
               );
               writer = getWriter(executionOptions);
             } catch {
@@ -177,7 +177,7 @@ function createStreamingCachedTool<T extends Tool>(
       if (!writer) {
         try {
           const { getWriter } = await import(
-            "@chagas-ai/ai-sdk-tools-artifacts"
+            "@chagas-ai/artifacts"
           );
           writer = getWriter(executionOptions);
         } catch {

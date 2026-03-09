@@ -1,5 +1,5 @@
 {
-  "name": "@chagas-ai/ai-sdk-tools-artifacts",
+  "name": "@chagas-ai/artifacts",
   "private": false,
   "version": "1.2.0-chagas.0",
   "description": "Advanced streaming interfaces for AI applications",
@@ -60,7 +60,7 @@
     "@types/react": "^19.2.6",
     "typescript": "^5.9.3",
     "tsup": "^8.5.1",
-    "@chagas-ai/ai-sdk-tools-store": "workspace:*"
+    "@chagas-ai/store": "workspace:*"
   },
   "peerDependencies": {
     "ai": "^5.0.82",

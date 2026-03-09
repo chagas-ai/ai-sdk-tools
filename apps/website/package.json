@@ -11,9 +11,9 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@chagas-ai/ai-sdk-tools-artifacts": "workspace:*",
-    "@chagas-ai/ai-sdk-tools-devtools": "workspace:*",
-    "@chagas-ai/ai-sdk-tools-store": "workspace:*",
+    "@chagas-ai/artifacts": "workspace:*",
+    "@chagas-ai/devtools": "workspace:*",
+    "@chagas-ai/store": "workspace:*",
     "@ai-sdk/openai": "^2.0.69",
     "@openpanel/nextjs": "^1.0.16",
     "ai": "^5.0.97",

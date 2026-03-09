@@ -1,4 +1,4 @@
-import type { MemoryConfig } from "@chagas-ai/ai-sdk-tools-memory";
+import type { MemoryConfig } from "@chagas-ai/memory";
 import type {
   IdGenerator,
   LanguageModel,

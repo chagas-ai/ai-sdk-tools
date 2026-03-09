@@ -11,12 +11,12 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@chagas-ai/ai-sdk-tools-agents": "workspace:*",
-    "@chagas-ai/ai-sdk-tools-artifacts": "workspace:*",
+    "@chagas-ai/agents": "workspace:*",
+    "@chagas-ai/artifacts": "workspace:*",
     "@ai-sdk-tools/cache": "workspace:*",
-    "@chagas-ai/ai-sdk-tools-devtools": "workspace:*",
-    "@chagas-ai/ai-sdk-tools-memory": "workspace:*",
-    "@chagas-ai/ai-sdk-tools-store": "workspace:*",
+    "@chagas-ai/devtools": "workspace:*",
+    "@chagas-ai/memory": "workspace:*",
+    "@chagas-ai/store": "workspace:*",
     "@ai-sdk/openai": "^2.0.69",
     "@ai-sdk/react": "^2.0.97",
     "@radix-ui/react-accordion": "^1.2.12",

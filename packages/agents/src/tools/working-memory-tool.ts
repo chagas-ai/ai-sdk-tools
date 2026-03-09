@@ -1,4 +1,4 @@
-import type { MemoryConfig } from "@chagas-ai/ai-sdk-tools-memory";
+import type { MemoryConfig } from "@chagas-ai/memory";
 import { tool } from "ai";
 import { z } from "zod";
 import { getContext } from "../context.js";

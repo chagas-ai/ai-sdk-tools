@@ -18,11 +18,11 @@
         "@ai-sdk-tools/cache": "workspace:*",
         "@ai-sdk/openai": "^2.0.69",
         "@ai-sdk/react": "^2.0.97",
-        "@chagas-ai/ai-sdk-tools-agents": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-artifacts": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-devtools": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-memory": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-store": "workspace:*",
+        "@chagas-ai/agents": "workspace:*",
+        "@chagas-ai/artifacts": "workspace:*",
+        "@chagas-ai/devtools": "workspace:*",
+        "@chagas-ai/memory": "workspace:*",
+        "@chagas-ai/store": "workspace:*",
         "@radix-ui/react-accordion": "^1.2.12",
         "@radix-ui/react-avatar": "^1.1.11",
         "@radix-ui/react-collapsible": "^1.1.12",
@@ -92,9 +92,9 @@
       "version": "0.1.0",
       "dependencies": {
         "@ai-sdk/openai": "^2.0.69",
-        "@chagas-ai/ai-sdk-tools-artifacts": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-devtools": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-store": "workspace:*",
+        "@chagas-ai/artifacts": "workspace:*",
+        "@chagas-ai/devtools": "workspace:*",
+        "@chagas-ai/store": "workspace:*",
         "@openpanel/nextjs": "^1.0.16",
         "ai": "^5.0.97",
         "geist": "^1.5.1",
@@ -115,11 +115,11 @@
       },
     },
     "packages/agents": {
-      "name": "@chagas-ai/ai-sdk-tools-agents",
+      "name": "@chagas-ai/agents",
       "version": "1.2.0-chagas.0",
       "devDependencies": {
         "@ai-sdk-tools/debug": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-memory": "workspace:*",
+        "@chagas-ai/memory": "workspace:*",
         "@types/node": "^24.10.1",
         "ai": "^5.0.97",
         "tsup": "^8.5.1",
@@ -136,11 +136,11 @@
       "version": "1.2.0",
       "devDependencies": {
         "@ai-sdk-tools/cache": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-agents": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-artifacts": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-devtools": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-memory": "workspace:*",
-        "@chagas-ai/ai-sdk-tools-store": "workspace:*",
+        "@chagas-ai/agents": "workspace:*",
+        "@chagas-ai/artifacts": "workspace:*",
+        "@chagas-ai/devtools": "workspace:*",
+        "@chagas-ai/memory": "workspace:*",
+        "@chagas-ai/store": "workspace:*",
         "@types/node": "^24.10.1",
         "ai": "^5.0.97",
         "tsup": "^8.5.1",
@@ -163,14 +163,14 @@
       ],
     },
     "packages/artifacts": {
-      "name": "@chagas-ai/ai-sdk-tools-artifacts",
+      "name": "@chagas-ai/artifacts",
       "version": "1.2.0-chagas.0",
       "dependencies": {
         "zod": "^4.1.12",
       },
       "devDependencies": {
         "@ai-sdk/react": "^2.0.97",
-        "@chagas-ai/ai-sdk-tools-store": "workspace:*",
+        "@chagas-ai/store": "workspace:*",
         "@types/node": "^24.10.1",
         "@types/react": "^19.2.6",
         "tsup": "^8.5.1",
@@ -185,7 +185,7 @@
       "name": "@ai-sdk-tools/cache",
       "version": "1.2.0",
       "devDependencies": {
-        "@chagas-ai/ai-sdk-tools-artifacts": "workspace:*",
+        "@chagas-ai/artifacts": "workspace:*",
         "@types/node": "^24.10.1",
         "ai": "^5.0.97",
         "tsup": "^8.5.1",
@@ -207,7 +207,7 @@
       },
     },
     "packages/devtools": {
-      "name": "@chagas-ai/ai-sdk-tools-devtools",
+      "name": "@chagas-ai/devtools",
       "version": "1.2.0-chagas.0",
       "dependencies": {
         "@emotion/react": "^11.14.0",
@@ -231,13 +231,13 @@
       },
       "peerDependencies": {
         "@ai-sdk/react": ">=2.0.0",
-        "@chagas-ai/ai-sdk-tools-store": "*",
+        "@chagas-ai/store": "*",
         "react": ">=16.8.0",
         "react-dom": ">=16.8.0",
       },
     },
     "packages/memory": {
-      "name": "@chagas-ai/ai-sdk-tools-memory",
+      "name": "@chagas-ai/memory",
       "version": "1.2.0-chagas.0",
       "dependencies": {
         "zod": "^4.1.12",
@@ -284,7 +284,7 @@
       },
     },
     "packages/store": {
-      "name": "@chagas-ai/ai-sdk-tools-store",
+      "name": "@chagas-ai/store",
       "version": "1.2.0-chagas.0",
       "dependencies": {
         "@types/node": "^24.10.1",
@@ -374,15 +374,15 @@
 
     "@braintree/sanitize-url": ["@braintree/sanitize-url@7.1.1", "", {}, "sha512-i1L7noDNxtFyL5DmZafWy1wRVhGehQmzZaz1HiN5e7iylJMSZR7ekOV7NsIqa5qBldlLrsKv4HbgFUVlQrz8Mw=="],
 
-    "@chagas-ai/ai-sdk-tools-agents": ["@chagas-ai/ai-sdk-tools-agents@workspace:packages/agents"],
+    "@chagas-ai/agents": ["@chagas-ai/agents@workspace:packages/agents"],
 
-    "@chagas-ai/ai-sdk-tools-artifacts": ["@chagas-ai/ai-sdk-tools-artifacts@workspace:packages/artifacts"],
+    "@chagas-ai/artifacts": ["@chagas-ai/artifacts@workspace:packages/artifacts"],
 
-    "@chagas-ai/ai-sdk-tools-devtools": ["@chagas-ai/ai-sdk-tools-devtools@workspace:packages/devtools"],
+    "@chagas-ai/devtools": ["@chagas-ai/devtools@workspace:packages/devtools"],
 
-    "@chagas-ai/ai-sdk-tools-memory": ["@chagas-ai/ai-sdk-tools-memory@workspace:packages/memory"],
+    "@chagas-ai/memory": ["@chagas-ai/memory@workspace:packages/memory"],
 
-    "@chagas-ai/ai-sdk-tools-store": ["@chagas-ai/ai-sdk-tools-store@workspace:packages/store"],
+    "@chagas-ai/store": ["@chagas-ai/store@workspace:packages/store"],
 
     "@changesets/apply-release-plan": ["@changesets/apply-release-plan@7.0.13", "", { "dependencies": { "@changesets/config": "^3.1.1", "@changesets/get-version-range-type": "^0.4.0", "@changesets/git": "^3.0.4", "@changesets/should-skip-package": "^0.1.2", "@changesets/types": "^6.1.0", "@manypkg/get-packages": "^1.1.3", "detect-indent": "^6.0.0", "fs-extra": "^7.0.1", "lodash.startcase": "^4.4.0", "outdent": "^0.5.0", "prettier": "^2.7.1", "resolve-from": "^5.0.0", "semver": "^7.5.3" } }, "sha512-BIW7bofD2yAWoE8H4V40FikC+1nNFEKBisMECccS16W1rt6qqhNTBDmIw5HaqmMgtLNz9e7oiALiEUuKrQ4oHg=="],
 

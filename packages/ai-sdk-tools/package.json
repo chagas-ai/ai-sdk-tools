@@ -97,12 +97,12 @@
     "typescript": "^5.9.3",
     "zod": "^4.1.12",
     "ai": "^5.0.97",
-    "@chagas-ai/ai-sdk-tools-agents": "workspace:*",
-    "@chagas-ai/ai-sdk-tools-artifacts": "workspace:*",
+    "@chagas-ai/agents": "workspace:*",
+    "@chagas-ai/artifacts": "workspace:*",
     "@ai-sdk-tools/cache": "workspace:*",
-    "@chagas-ai/ai-sdk-tools-devtools": "workspace:*",
-    "@chagas-ai/ai-sdk-tools-memory": "workspace:*",
-    "@chagas-ai/ai-sdk-tools-store": "workspace:*"
+    "@chagas-ai/devtools": "workspace:*",
+    "@chagas-ai/memory": "workspace:*",
+    "@chagas-ai/store": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

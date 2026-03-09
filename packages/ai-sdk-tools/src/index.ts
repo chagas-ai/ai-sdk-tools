@@ -25,9 +25,9 @@
  */
 
 // Re-export everything from all packages
-export * from "@chagas-ai/ai-sdk-tools-agents";
-export * from "@chagas-ai/ai-sdk-tools-artifacts";
+export * from "@chagas-ai/agents";
+export * from "@chagas-ai/artifacts";
 export * from "@ai-sdk-tools/cache";
-export * from "@chagas-ai/ai-sdk-tools-devtools";
-export * from "@chagas-ai/ai-sdk-tools-memory";
-export * from "@chagas-ai/ai-sdk-tools-store";
+export * from "@chagas-ai/devtools";
+export * from "@chagas-ai/memory";
+export * from "@chagas-ai/store";
