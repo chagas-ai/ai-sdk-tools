@@ -40,7 +40,7 @@
     "@ai-sdk/react": ">=2.0.0",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
-    "@chagas-ai/store": "*"
+    "@chagas-ai/store": "1.2.0-chagas.0"
   },
   "peerDependenciesMeta": {
     "@chagas-ai/store": {
