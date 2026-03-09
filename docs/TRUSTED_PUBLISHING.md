@@ -18,6 +18,7 @@ This fork publishes packages using GitHub Actions OIDC (no `NPM_TOKEN`).
 
 - Node.js >= 22.14 and npm >= 11.5.1 in the publishing workflow.
 - `id-token: write` permission enabled.
+- Repository secret `CHAGAS_RELEASE_PAT` configured with GitHub repository `Contents: Read/Write` and `Pull requests: Read/Write` permissions.
 - `NPM_CONFIG_PROVENANCE=true` is set for publish step.
 - `changeset publish --provenance` is used in release scripts.
 

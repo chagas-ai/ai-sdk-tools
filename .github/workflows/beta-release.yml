@@ -61,6 +61,12 @@ jobs:
       - name: Version Beta Packages
         run: bun run version-packages:beta
 
+      - name: Validate Release PAT
+        if: ${{ secrets.CHAGAS_RELEASE_PAT == '' }}
+        run: |
+          echo "::error::Missing CHAGAS_RELEASE_PAT secret. Add a fine-grained PAT with repository Contents (Read/Write) and Pull requests (Read/Write)."
+          exit 1
+
       - name: Create Beta Release Pull Request
         id: changesets
         uses: changesets/action@v1
@@ -70,7 +76,7 @@ jobs:
           commit: "chore: release beta packages"
           title: "chore: release beta packages"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CHAGAS_RELEASE_PAT }}
           NPM_CONFIG_PROVENANCE: true
 
       - name: Exit Beta Mode
