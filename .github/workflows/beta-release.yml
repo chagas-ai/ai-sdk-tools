@@ -62,10 +62,13 @@ jobs:
         run: bun run version-packages:beta
 
       - name: Validate Release PAT
-        if: ${{ secrets.CHAGAS_RELEASE_PAT == '' }}
+        env:
+          CHAGAS_RELEASE_PAT: ${{ secrets.CHAGAS_RELEASE_PAT }}
         run: |
-          echo "::error::Missing CHAGAS_RELEASE_PAT secret. Add a fine-grained PAT with repository Contents (Read/Write) and Pull requests (Read/Write)."
-          exit 1
+          if [ -z "$CHAGAS_RELEASE_PAT" ]; then
+            echo "::error::Missing CHAGAS_RELEASE_PAT secret. Add a fine-grained PAT with repository Contents (Read/Write) and Pull requests (Read/Write)."
+            exit 1
+          fi
 
       - name: Create Beta Release Pull Request
         id: changesets
