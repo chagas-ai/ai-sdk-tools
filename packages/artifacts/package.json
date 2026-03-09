@@ -1,7 +1,7 @@
 {
   "name": "@chagas-ai/artifacts",
   "private": false,
-  "version": "1.2.0-chagas.0",
+  "version": "1.2.0",
   "description": "Advanced streaming interfaces for AI applications",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

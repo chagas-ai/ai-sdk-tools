@@ -1,5 +1,16 @@
 # @ai-sdk-tools/memory
 
+## 1.2.0
+
+### Patch Changes
+
+- c54d70a: Initial Chagas fork release:
+
+  - add resumable stream `consumeSseStream` forwarding in agents UI responses.
+  - add `skipUserMessageSave` and first-class `preSaveUserMessage` options for deterministic memory persistence.
+  - add history tail dedupe by `message.id` to avoid duplicate prompt entries.
+  - migrate package namespace to `@chagas-ai/*` for maintained fork publishing.
+
 ## 2.0.0
 
 ### Minor Changes
